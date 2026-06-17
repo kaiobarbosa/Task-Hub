@@ -189,13 +189,21 @@ button:hover {
   color: #ff5555;
 }
 
-/* Área do Conteúdo Principal */
 .main-content {
   flex: 1;
   background-color: var(--bg-principal);
+  padding: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  box-sizing: border-box;
+
+  /* A SOLUÇÃO: Força o conteúdo a começar exatamente onde a sidebar termina */
+  margin-left: 250px; 
+  
+  /* Garante que se o layout usar absoluto, o conteúdo não suma */
+  position: relative; 
 }
 /* ==========================================
    ESTILOS DE LINKS DE CADASTRO
@@ -222,4 +230,93 @@ button:hover {
 .cadastro-link a:hover {
   text-decoration: underline;
   filter: brightness(1.2);
+}
+
+/* ==========================================
+   ESTILOS DO FRAME CENTRAL DE DADOS
+   ========================================== */
+
+/* Remove o alinhamento central padrão do main-content para o frame ocupar o espaço correto,
+   ou mantém se quiser ele exatamente como no desenho */
+.main-content {
+  flex: 1;                     /* Ocupa todo o espaço restante à direita da sidebar */
+  background-color: var(--bg-principal);
+  padding: 40px;               /* Margem interna para o frame não colar nas bordas da tela */
+  display: flex;
+  justify-content: center;     /* Centraliza o frame horizontalmente no espaço disponível */
+  align-items: center;         /* Centraliza o frame verticalmente */
+  height: 100%;                /* Garante que ocupe a altura total da tela */
+  box-sizing: border-box;
+}
+
+/* O "retângulo preto" externo do desenho */
+.frame-container {
+  background-color: var(--bg-card); /* Mesma cor dos cards/sidebar */
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 24px; /* Espessura da "borda" preta interna que aparece no desenho */
+  width: 100%;
+  height: 100%;
+  max-width: 1200px; /* Evita que estique demais em telas ultra-wide */
+  max-height: 80vh;  /* Limita a altura máxima para ficar proporcional */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  display: flex;
+}
+
+/* O "retângulo azul" interno do desenho (Área dos dados) */
+.frame-conteudo {
+  flex: 1;
+  background-color: rgba(0, 173, 181, 0.05); /* Usa a sua --cor-destaque bem sutil no fundo */
+  border: 2px solid var(--cor-destaque);       /* Borda destacada em ciano */
+  border-radius: 8px;
+  padding: 30px;
+  overflow-y: auto; /* Garante scroll caso venham muitos dados do banco */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ajuste fino para os textos dentro do frame de dados */
+.frame-conteudo h2 {
+  text-align: left;
+  color: var(--texto-principal);
+  margin-bottom: 6px;
+}
+
+.frame-conteudo p {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+/* Container opcional para organizar as informações que vêm do banco */
+.dados-wrapper {
+  flex: 1;
+  background-color: var(--bg-principal);
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+  padding: 20px;
+}
+
+.dashboard-layout {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  /* Remova position: absolute se houver necessidade, ou garanta o fluxo abaixo: */
+  overflow: hidden; 
+}
+
+.frame-container {
+  background-color: var(--bg-card);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 24px;
+  
+  /* Faz o frame se adaptar bem ao espaço que sobrou ao lado da sidebar */
+  width: 100%;
+  height: 100%;
+  max-width: 1000px;  /* Largura máxima confortável */
+  max-height: 85vh;   /* Altura máxima para não cortar no topo/fundo */
+  
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  display: flex;
+  box-sizing: border-box;
 }
