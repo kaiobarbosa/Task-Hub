@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home - Meu Site Escuro</title>
+  <title>Home</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
       
       <nav>
         <a href="homeScrean.html" class="menu-item ativo">Início</a>
-        <a href="#" class="menu-item">Dashboard</a>
+        <a href="#" class="menu-item", id="tasks">Tasks</a>
         <a href="#" class="menu-item">Usuários</a>
         <a href="#" class="menu-item">Configurações</a>
       </nav>
@@ -24,17 +24,19 @@
     </aside>
   </div>
   <div class="main-content">
-  <div class="frame-container">
-    <div class="frame-conteudo">
-      <h2>Dados do Sistema</h2>
-      <p>Informações carregadas do banco de dados</p>
-      
-      <div class="dados-wrapper">
-        <p style="color: var(--texto-principal);">Conteúdo do banco de dados...</p>
+    <div class="frame-container">
+      <div class="frame-conteudo">
+        <h2>Dados do Sistema</h2>
+        <p>Informações carregadas do banco de dados</p>
+        
+        <div class="dados-wrapper">
+          <p style="color: var(--texto-principal);">Conteúdo do banco de dados...</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+  <script src="javascript/home.js"></script>
 
 </body>
 </html>

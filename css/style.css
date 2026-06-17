@@ -205,6 +205,16 @@ button:hover {
   /* Garante que se o layout usar absoluto, o conteúdo não suma */
   position: relative; 
 }
+
+.href{
+  color: var(--cor-destaque);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+  text-align: center;
+  align-items: center;
+}
+
 /* ==========================================
    ESTILOS DE LINKS DE CADASTRO
    ========================================== */
