@@ -29,3 +29,6 @@ def receber_dados():
 if __name__ == '__main__':
     # Roda o servidor na porta 5000
     app.run(port=5000, debug=True)
+
+# python backend/readjson.py
+# comanod para rodar o servidor Flask e receber os dados do JavaScript. Certifique-se de que o servidor esteja rodando antes de enviar os dados do frontend.
