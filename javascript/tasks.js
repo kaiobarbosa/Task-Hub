@@ -40,49 +40,45 @@ document.addEventListener("DOMContentLoaded", () => {
 // PASSO 1: Função que vai buscar os dados no Python
 async function buscarDadosDoBanco() {
     try {
-        // Faz o "Pedido" para a nova rota GET do Flask
-        const resposta = await fetch('http://127.0.0.1:5000/listar-dados');
+        console.log("1. Tentando conectar com o Python...");
+        
+        // Lembre-se: se no seu navegador a barra de endereço estiver "localhost:5500", 
+        // mude o "127.0.0.1" abaixo para "localhost" também!
+        const resposta = await fetch('http://127.0.0.1:5001/listar-dados');
 
         if (!resposta.ok) {
             throw new Error(`Erro de rede! Status: ${resposta.status}`);
         }
 
-        // Abre o pacote JSON enviado pelo Python
+        console.log("2. Conexão feita! Lendo os dados...");
         const dados = await resposta.json();
-        console.log("Dados que vieram do Banco de Dados:", dados);
-
-        // --- NOVA LÓGICA: PREENCHER A TABELA ---
         
-        // 1. Encontra o corpo da tabela onde as linhas vão entrar
+        console.log("3. Sucesso! Dados recebidos:", dados);
+
+        // --- LÓGICA DE PREENCHER A TABELA ---
         const corpoTabela = document.getElementById('tabela-tasks-corpo');
 
-        // 2. Limpa os exemplos fixos (mock) que estavam no HTML
-        corpoTabela.innerHTML = "";
-
-        // Verifica se o banco não retornou nada (tabela vazia)
-        if (dados.length === 0) {
-            corpoTabela.innerHTML = `
-                <tr>
-                    <td colspan="3" style="text-align: center; color: var(--texto-secundario);">
-                        Nenhuma tarefa encontrada.
-                    </td>
-                </tr>
-            `;
-            return; // Encerra a função aqui
+        if (!corpoTabela) {
+            console.error("4. ERRO: O JavaScript não encontrou a tag <tbody id='tabela-tasks-corpo'> no seu HTML!");
+            return;
         }
 
-        // 3. Percorre cada item (tarefa) que veio do banco de dados
+        corpoTabela.innerHTML = ""; // Limpa os exemplos mockados
+
+        if (dados.length === 0) {
+            corpoTabela.innerHTML = `<tr><td colspan="3" style="text-align: center;">Nenhuma tarefa encontrada no banco.</td></tr>`;
+            return;
+        }
+
+        // Percorre os dados e cria as linhas
         dados.forEach(item => {
-            // Verifica se a tarefa está concluída (true/1) ou não
-            const isConcluida = item.complete === true || item.complete === 1;
-            
-            // Define o texto, a classe e o estado do checkbox baseado no status
+            const isConcluida = item.complete === true || item.complete === 1 || item.complete === "true";
             const textoStatus = isConcluida ? 'Concluída' : 'Pendente';
             const classeStatus = isConcluida ? 'concluida' : 'pendente';
             const estadoCheckbox = isConcluida ? 'checked' : '';
 
-            // Usa o template string (crases ` `) para montar o HTML da linha
-            // NOTA: Se no banco o nome da coluna de data for diferente, mude "item.date_task" para o nome exato
+            // ATENÇÃO: Confirme se no seu banco as colunas chamam 'task' e 'date_task'. 
+            // Se forem diferentes (ex: 'tarefa', 'data'), mude aqui embaixo.
             const linhaHTML = `
                 <tr>
                     <td>${item.task}</td>
@@ -95,16 +91,12 @@ async function buscarDadosDoBanco() {
                     </td>
                 </tr>
             `;
-
-            // 4. Injeta a linha criada dentro da tabela
             corpoTabela.innerHTML += linhaHTML;
         });
+        
+        console.log("5. Tabela preenchida com sucesso!");
 
     } catch (erro) {
-        console.error("Falha ao buscar os dados:", erro);
-        const corpoTabela = document.getElementById('tabela-tasks-corpo');
-        if (corpoTabela) {
-             corpoTabela.innerHTML = `<tr><td colspan="3" style="text-align: center; color: #ff5555;">Erro ao carregar tarefas. Verifique o console.</td></tr>`;
-        }
+        console.error("ERRO GRAVE AO BUSCAR DADOS:", erro);
     }
 }

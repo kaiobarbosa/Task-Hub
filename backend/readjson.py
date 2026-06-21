@@ -58,8 +58,8 @@ def listar_dados():
         resposta_erro.headers.add("Access-Control-Allow-Origin", "*")
         return resposta_erro, 500
 if __name__ == '__main__':
-    # Roda o servidor na porta 5000
-    app.run(port=5000, debug=True)
+    # Roda o servidor na porta 5001
+    app.run(port=5001, debug=True)
 
 # python backend/readjson.py
 # comanod para rodar o servidor Flask e receber os dados do JavaScript. Certifique-se de que o servidor esteja rodando antes de enviar os dados do frontend.˜
