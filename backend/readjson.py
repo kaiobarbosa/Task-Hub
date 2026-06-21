@@ -4,7 +4,9 @@ import json
 import main
 
 app = Flask(__name__)
-CORS(app) # Permite que o JavaScript do navegador acesse este servidor
+
+# Substitua o "CORS(app)" antigo por este abaixo:
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route('/receber-dados', methods=['POST'])
 def receber_dados():
@@ -26,23 +28,35 @@ def receber_dados():
     # Retorna uma resposta de sucesso para o JavaScript
     return jsonify({"status": "sucesso", "mensagem": "Dados processados no Python!"}), 200
 
-@app.route('/listar-dados', methods=['GET'])
+# Adicionamos o 'OPTIONS' aqui, que é a requisição invisível que o navegador faz para checar o CORS
+@app.route('/listar-dados', methods=['GET', 'OPTIONS'])
 def listar_dados():
+    # Se for a requisição de checagem do navegador (OPTIONS), devolvemos apenas as permissões
+    if request.method == 'OPTIONS':
+        resposta_options = app.make_default_options_response()
+        resposta_options.headers.add("Access-Control-Allow-Origin", "*")
+        resposta_options.headers.add("Access-Control-Allow-Headers", "*")
+        resposta_options.headers.add("Access-Control-Allow-Methods", "*")
+        return resposta_options
+
     print("--- Recebido pedido de busca de dados do JavaScript ---")
     
     try:
-        # Passo 2: O Python chama a função que vai fazer o SELECT * no banco.
-        # VOCÊ PRECISA CRIAR ESSA FUNÇÃO NO SEU main.py (ex: buscar_todas_as_tarefas)
-        # Ela deve retornar uma lista de dicionários Python.
         dados_do_banco = main.buscar_todas_as_tarefas() 
         
-        # Passo 3: O Python pega o resultado do banco, transforma em JSON e envia de volta
-        return jsonify(dados_do_banco), 200
+        # Criamos o objeto de resposta JSON
+        resposta = jsonify(dados_do_banco)
+        
+        # FORÇA BRUTA: Injetamos as permissões de CORS direto na veia da resposta!
+        resposta.headers.add("Access-Control-Allow-Origin", "*")
+        
+        return resposta, 200
         
     except Exception as e:
         print(f"Erro ao buscar dados: {e}")
-        return jsonify({"erro": "Falha ao buscar dados no servidor"}), 500
-
+        resposta_erro = jsonify({"erro": "Falha ao buscar dados no servidor"})
+        resposta_erro.headers.add("Access-Control-Allow-Origin", "*")
+        return resposta_erro, 500
 if __name__ == '__main__':
     # Roda o servidor na porta 5000
     app.run(port=5000, debug=True)
