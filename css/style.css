@@ -330,3 +330,195 @@ button:hover {
   display: flex;
   box-sizing: border-box;
 }
+
+/* ==========================================
+   ESTILOS DA TELA TASKS (DUAS DIVS)
+   ========================================== */
+
+/* Modifica o flex para empilhar os elementos (coluna) e preencher o espaço */
+/* Modifica o flex para empilhar os elementos e remove o espaço extra */
+.main-content.layout-tasks {
+  flex-direction: column;
+  justify-content: flex-start; 
+  align-items: stretch;
+  
+  /* Mantém 30px de respiro (margem interna) em todos os 4 lados */
+  padding: 30px;               
+  
+  /* A CORREÇÃO: Zera a margem esquerda que estava empurrando os blocos para longe da sidebar */
+  margin-left: 0;              
+  
+  gap: 30px;                   /* Cria o espaço entre a div superior e inferior */
+}
+
+/* Div de cima */
+.task-superior {
+  background-color: var(--bg-card); /* Mesma cor da Sidebar */
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  
+  /* A mágica da proporção: isso diz que ela ocupa 1 parte do espaço flexível */
+  flex: 1; 
+}
+
+/* Div de baixo */
+.task-inferior {
+  background-color: var(--bg-card); /* Mesma cor da Sidebar */
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  
+  /* Aqui dizemos que ela ocupa 3 partes (sendo 3x maior que a div superior) */
+  flex: 3; 
+}
+
+/* ==========================================
+   ESTILOS DA TABELA DE TASKS
+   ========================================== */
+
+.tabela-tasks {
+  width: 100%;
+  border-collapse: collapse; /* Remove espaços duplos nas bordas */
+  margin-top: 20px;
+  text-align: left;
+}
+
+.tabela-tasks th, 
+.tabela-tasks td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.tabela-tasks th {
+  color: var(--texto-secundario);
+  font-size: 14px;
+  text-transform: uppercase; /* Deixa o cabeçalho em letras maiúsculas */
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.tabela-tasks td {
+  color: var(--texto-principal);
+  font-size: 15px;
+}
+
+/* Zebra striping opcional (deixa linhas alternadas ligeiramente mais escuras) */
+.tabela-tasks tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Estilização básica para as tags de Status (complete) */
+.badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.badge.pendente {
+  background-color: rgba(255, 165, 0, 0.15);
+  color: #ffa500;
+}
+
+.badge.concluida {
+  background-color: rgba(0, 173, 181, 0.15); /* Usa a sua cor de destaque */
+  color: var(--cor-destaque);
+}
+/* Container para alinhar o checkbox e o texto do status lado a lado */
+.status-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaço entre o checkbox e a tag de texto */
+}
+
+/* Estilização do checkbox dentro da tabela */
+.task-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--cor-destaque); /* Faz o "check" ficar azul ciano quando marcado */
+}
+
+/* ==========================================
+   ESTILOS DA DIV SUPERIOR (PESQUISA E BOTÕES)
+   ========================================== */
+
+/* Transforma a div superior em um container Flexbox */
+.task-superior {
+  display: flex;
+  justify-content: space-between; /* Empurra um grupo pra esquerda e outro pra direita */
+  align-items: center;            /* Centraliza verticalmente */
+  padding: 20px 30px;             /* Adiciona um espaçamento interno */
+}
+
+/* Agrupamento da Esquerda */
+.task-sup-esquerda {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Espaço entre o H2 e a barra de pesquisa */
+}
+
+.task-sup-esquerda h2 {
+  margin-bottom: 0; /* Remove a margem do H2 original para alinhar perfeito */
+}
+
+/* Estilo do Campo de Pesquisa */
+.input-pesquisa {
+  background-color: var(--bg-principal);
+  color: var(--texto-principal);
+  border: 1px solid var(--borda);
+  padding: 10px 16px;
+  border-radius: 6px;
+  outline: none;
+  font-size: 14px;
+  width: 250px;
+  transition: border-color 0.3s;
+}
+
+.input-pesquisa:focus {
+  border-color: var(--cor-destaque);
+}
+
+/* Agrupamento da Direita (Botões) */
+.task-sup-direita {
+  display: flex;
+  gap: 15px; /* Espaço entre os dois botões */
+}
+
+/* Botão Primário (Mesmo estilo do botão principal de login) */
+.btn-primario {
+  background-color: var(--cor-destaque);
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: filter 0.3s;
+  width: auto; /* Remove o width: 100% que pode estar herdando do CSS global */
+}
+
+.btn-primario:hover {
+  filter: brightness(1.15);
+}
+
+/* Botão Secundário (Apenas com borda) */
+.btn-secundario {
+  background-color: transparent;
+  color: var(--texto-secundario);
+  border: 1px solid var(--borda);
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: auto;
+}
+
+.btn-secundario:hover {
+  border-color: var(--cor-destaque);
+  color: var(--texto-principal);
+}

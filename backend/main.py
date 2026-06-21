@@ -6,6 +6,29 @@ from operationsdb import *
 app = Flask(__name__)
 CORS(app) # Permite o Front-end conversar com o Back-end
 
+# Dentro do main.py
+def buscar_todas_as_tarefas():
+    print("Iniciando processo de busca de tarefas no banco de dados...")
+    # 1. Conecta no banco
+    minha_conexao = conectar_banco()
+    if not minha_conexao:
+        return jsonify({"status": "erro", "mensagem": "Erro de conexão com o banco de dados"}), 500
+
+    try:
+        print("Conexão com o banco de dados estabelecida. Preparando para buscar tarefas...")
+        meu_cursor = minha_conexao.cursor()
+        lista_formatada = selectAllTasks(meu_cursor, minha_conexao) # <-- Chama a função que faz o SELECT * no banco
+        # 3. Pega os resultados: resultados = cursor.fetchall()
+        print(f"Resultados brutos do banco: {lista_formatada}")
+        return lista_formatada
+    except Exception as e:
+        print(f"Erro ao buscar tarefas: {e}")
+        return jsonify({"status": "erro", "mensagem": str(e)}), 500
+    finally:
+        if minha_conexao and minha_conexao.is_connected():
+            minha_conexao.close()
+            print("Conexão com o MySQL encerrada.\n")
+
 def cadastrar_usuario():
 
     print("Iniciando processo de cadastro do usuário...")

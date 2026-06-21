@@ -33,3 +33,22 @@ def insertUsers(cursor, conexao):
             print("Conexão com o MySQL foi encerrada.")
 
 
+def selectAllTasks(cursor, conexao):
+    try:
+        comando = "SELECT * FROM task"
+        cursor.execute(comando)
+        resultados = cursor.fetchall()
+        
+        lista_formatada = []
+        for linha in resultados:
+            tarefa_dict = {"task": linha[1], "date_task": linha[2], "status": linha[3]}
+            lista_formatada.append(tarefa_dict)
+        
+        print("Tarefas buscadas e formatadas com sucesso!")
+        return lista_formatada
+    except Exception as e:
+        print(f"Erro ao buscar tarefas: {e}")
+    finally:
+        if conexao and conexao.is_connected():
+            conexao.close()
+            print("Conexão com o MySQL foi encerrada.")

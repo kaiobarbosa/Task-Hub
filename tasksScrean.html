@@ -22,6 +22,60 @@
       
       <a href="index.html" class="menu-item sair">Sair da Conta</a>
     </aside>
+
+    <main class="main-content layout-tasks">
+            <div class="task-superior">
+        
+        <div class="task-sup-esquerda">
+          <h2>Tasks</h2>
+          <input type="text" class="input-pesquisa" placeholder="Pesquisar tarefas...">
+        </div>
+
+        <div class="task-sup-direita">
+          <button class="btn-secundario">SEARCH</button>
+          <button class="btn-primario">NEW TASK</button>
+        </div>
+
+      </div>
+      
+      <div class="task-inferior">
+        <h2>Minhas Tasks</h2>
+        
+        <table class="tabela-tasks">
+          <thead>
+            <tr>
+              <th>TASK</th>
+              <th>DATE TASK</th>
+              <th>STATUS</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-tasks-corpo">
+            <tr>
+              <td></td>
+              <td></td>
+              <td>
+                <div class="status-container">
+                  <input type="checkbox" class="task-checkbox">
+                  <span class="badge pendente">Pendente</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>
+                <div class="status-container">
+                  <input type="checkbox" class="task-checkbox" checked>
+                  <span class="badge concluida">Concluída</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </main>
+
   </div>
 
   <script src="javascript/tasks.js"></script>
