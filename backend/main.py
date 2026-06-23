@@ -29,6 +29,28 @@ def buscar_todas_as_tarefas():
             minha_conexao.close()
             print("Conexão com o MySQL encerrada.\n")
 
+def buscar_tarefas_por_termo(termo_de_busca):
+    print(f"Iniciando busca de tarefas com o termo '{termo_de_busca}' no banco de dados...")
+    
+    minha_conexao = conectar_banco()
+    if not minha_conexao:
+        # Mantendo o padrão de retorno de erro que você usou em cadastrar_usuario
+        return jsonify({"status": "erro", "mensagem": "Erro de conexão com o banco de dados"}), 500
+
+    try:
+        meu_cursor = minha_conexao.cursor()
+        
+        # Chama a nova função do operationsdb.py
+        lista_formatada = searchTasksByTerm(meu_cursor, minha_conexao, termo_de_busca)
+        
+        return lista_formatada
+    except Exception as e:
+        print(f"Erro na intermediação da busca por termo: {e}")
+        return {"status": "erro", "mensagem": str(e)}
+    finally:
+        # O operationsdb já fecha a conexão no seu código, mas o try/finally garante segurança
+        pass 
+
 def cadastrar_usuario():
 
     print("Iniciando processo de cadastro do usuário...")

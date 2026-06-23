@@ -32,8 +32,34 @@ def insertUsers(cursor, conexao):
             conexao.close()
             print("Conexão com o MySQL foi encerrada.")
 
+def searchTasksByTerm(cursor, conexao, termo):
+    try:
+        # Usamos % para o comando LIKE do SQL buscar palavras que contenham o termo em qualquer parte
+        comando = "SELECT * FROM task WHERE task LIKE %s OR stats LIKE %s"
+        termo_formatado = f"%{termo}%"
+        
+        # Passamos o termo duas vezes porque temos dois %s no comando SQL
+        cursor.execute(comando, (termo_formatado, termo_formatado))
+        resultados = cursor.fetchall()
+        
+        lista_formatada = []
+        for linha in resultados:
+            # Mantendo a mesma estrutura de chaves do seu selectAllTasks
+            tarefa_dict = {"task": linha[1], "date_task": linha[2], "status": linha[3]}
+            lista_formatada.append(tarefa_dict)
+        
+        print(f"Busca por '{termo}' finalizada. Encontradas {len(lista_formatada)} tarefas.")
+        return lista_formatada
+    except Exception as e:
+        print(f"Erro ao buscar tarefas por termo: {e}")
+        return []
+    finally:
+        if conexao and conexao.is_connected():
+            conexao.close()
+            print("Conexão com o MySQL foi encerrada.")
 
-def selectAllTasks(cursor, conexao):
+def selectAllTasks(cursor, conexao): 
+
     try:
         comando = "SELECT * FROM task"
         cursor.execute(comando)

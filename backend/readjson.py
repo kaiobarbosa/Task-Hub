@@ -57,6 +57,41 @@ def listar_dados():
         resposta_erro = jsonify({"erro": "Falha ao buscar dados no servidor"})
         resposta_erro.headers.add("Access-Control-Allow-Origin", "*")
         return resposta_erro, 500
+    
+@app.route('/api/search', methods=['GET', 'OPTIONS'])
+def search_tasks():
+    # Tratamento de CORS para a rota de pesquisa
+    if request.method == 'OPTIONS':
+        resposta_options = app.make_default_options_response()
+        resposta_options.headers.add("Access-Control-Allow-Origin", "*")
+        resposta_options.headers.add("Access-Control-Allow-Headers", "*")
+        resposta_options.headers.add("Access-Control-Allow-Methods", "*")
+        return resposta_options
+
+    # 1. Pega o conteúdo enviado pelo JavaScript
+    search_query = request.args.get('query', '')
+    
+    print(f"--- Recebido pedido de busca com o termo: '{search_query}' ---")
+    
+    try:
+        # 2. Chama a função no main.py, repassando a responsabilidade para o banco de dados
+        resultados_do_banco = main.buscar_tarefas_por_termo(search_query)
+        
+        # Se for uma resposta de erro vinda do main (tupla com status code), repassa diretamente
+        if isinstance(resultados_do_banco, tuple):
+            return resultados_do_banco
+            
+        # 3. Formata e retorna os dados via JSON para o frontend
+        resposta = jsonify(resultados_do_banco)
+        resposta.headers.add("Access-Control-Allow-Origin", "*")
+        return resposta, 200
+        
+    except Exception as e:
+        print(f"Erro ao processar a busca no servidor: {e}")
+        resposta_erro = jsonify({"erro": "Falha ao processar pesquisa"})
+        resposta_erro.headers.add("Access-Control-Allow-Origin", "*")
+        return resposta_erro, 500
+
 if __name__ == '__main__':
     # Roda o servidor na porta 5001
     app.run(port=5001, debug=True)
