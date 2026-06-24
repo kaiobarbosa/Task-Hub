@@ -6,7 +6,29 @@ from operationsdb import *
 app = Flask(__name__)
 CORS(app) # Permite o Front-end conversar com o Back-end
 
-# Dentro do main.py
+
+def atualizar_status_tarefa(task_id, novo_status):
+    print(f"Iniciando atualização da tarefa {task_id} para o status '{novo_status}'...")
+    
+    minha_conexao = conectar_banco()
+    if not minha_conexao:
+        return {"status": "erro", "mensagem": "Erro de conexão com o banco de dados"}
+
+    try:
+        meu_cursor = minha_conexao.cursor()
+        
+        # Chama a função que criamos no operationsdb.py
+        sucesso = updateTaskStatus(meu_cursor, minha_conexao, task_id, novo_status)
+        
+        if sucesso:
+            return {"status": "sucesso", "mensagem": "Status atualizado com sucesso!"}
+        else:
+            return {"status": "erro", "mensagem": "Falha ao atualizar no banco de dados."}
+            
+    except Exception as e:
+        print(f"Erro na intermediação da atualização: {e}")
+        return {"status": "erro", "mensagem": str(e)}
+
 def buscar_todas_as_tarefas():
     print("Iniciando processo de busca de tarefas no banco de dados...")
     # 1. Conecta no banco

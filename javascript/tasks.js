@@ -96,7 +96,7 @@ function renderizarTarefas(tasks) {
                 <td>${item.date_task || "--/--/----"}</td>
                 <td>
                     <div class="status-container">
-                        <input type="checkbox" class="task-checkbox" ${estadoCheckbox}>
+                        <input type="checkbox" class="task-checkbox" data-id="${item.id}" ${estadoCheckbox}>
                         <span class="badge ${classeStatus}">${textoExibicao}</span>
                     </div>
                 </td>
@@ -128,3 +128,66 @@ async function buscarDadosDoBanco() {
         console.error("ERRO AO CARREGAR LISTA INICIAL:", erro);
     }
 }
+
+// Captura a alteração de qualquer checkbox dentro do corpo da tabela
+document.getElementById('tabela-tasks-corpo').addEventListener('change', async function(event) {
+    // Verifica se o elemento que disparou o evento foi um checkbox de tarefa
+    if (event.target.classList.contains('task-checkbox')) {
+        const checkbox = event.target;
+        const taskId = checkbox.getAttribute('data-id'); // Pega o ID da tarefa
+        const isChecked = checkbox.checked;
+        const badge = checkbox.nextElementSibling; // Pega o <span> que está logo após o checkbox
+        
+        // Define o novo status baseado em se o checkbox está marcado ou não
+        const novoStatus = isChecked ? 'Concluída' : 'Pendente';
+
+        // 1. Atualiza a interface (Visual) imediatamente para resposta rápida
+        if (isChecked) {
+            badge.textContent = 'Concluída';
+            badge.classList.remove('pendente');
+            badge.classList.add('concluida');
+        } else {
+            badge.textContent = 'Pendente';
+            badge.classList.remove('concluida');
+            badge.classList.add('pendente');
+        }
+
+        // 2. Envia a requisição para o Backend atualizar no Banco de Dados
+        try {
+            const response = await fetch('http://127.0.0.1:5001/api/update-status', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // Avisa o Flask que estamos mandando um JSON
+                },
+                body: JSON.stringify({ 
+                    id: taskId, 
+                    status: novoStatus 
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Falha na resposta do servidor.');
+            }
+
+            const resultado = await response.json();
+            console.log("Sucesso:", resultado.mensagem);
+
+        } catch (error) {
+            console.error("Erro ao atualizar no banco de dados:", error);
+            
+            // Reverte a alteração visual na tela caso dê erro no backend
+            alert("Erro ao salvar o status no servidor. Revertendo alteração.");
+            checkbox.checked = !isChecked;
+            
+            if (!isChecked) { // Reverte para Concluída
+                badge.textContent = 'Concluída';
+                badge.classList.remove('pendente');
+                badge.classList.add('concluida');
+            } else { // Reverte para Pendente
+                badge.textContent = 'Pendente';
+                badge.classList.remove('concluida');
+                badge.classList.add('pendente');
+            }
+        }
+    }
+});

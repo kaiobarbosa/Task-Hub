@@ -1,5 +1,22 @@
 import json
 
+def updateTaskStatus(cursor, conexao, task_id, novo_status):
+    try:
+        # Pelo seu código anterior, vi que a coluna de status se chama 'stats'
+        comando = "UPDATE task SET stats = %s WHERE id_task = %s"
+        cursor.execute(comando, (novo_status, task_id))
+        conexao.commit()
+        print(f"Status da tarefa ID {task_id} atualizado para '{novo_status}' com sucesso!")
+        return True
+    except Exception as e:
+        print(f"Erro ao atualizar status da tarefa: {e}")
+        return False
+    finally:
+        if conexao and conexao.is_connected():
+            conexao.close()
+            print("Conexão com o MySQL foi encerrada após o UPDATE.")
+
+
 def listar_usuarios(cursor):
     """Exemplo de SELECT usando o cursor"""
     comando = "SELECT id, nome FROM usuarios"
@@ -45,7 +62,7 @@ def searchTasksByTerm(cursor, conexao, termo):
         lista_formatada = []
         for linha in resultados:
             # Mantendo a mesma estrutura de chaves do seu selectAllTasks
-            tarefa_dict = {"task": linha[1], "date_task": linha[2], "status": linha[3]}
+            tarefa_dict = {"id": linha[0], "task": linha[1], "date_task": linha[2], "status": linha[3]}
             lista_formatada.append(tarefa_dict)
         
         print(f"Busca por '{termo}' finalizada. Encontradas {len(lista_formatada)} tarefas.")
@@ -67,7 +84,7 @@ def selectAllTasks(cursor, conexao):
         
         lista_formatada = []
         for linha in resultados:
-            tarefa_dict = {"task": linha[1], "date_task": linha[2], "status": linha[3]}
+            tarefa_dict = {"id": linha[0], "task": linha[1], "date_task": linha[2], "status": linha[3]}
             lista_formatada.append(tarefa_dict)
         
         print("Tarefas buscadas e formatadas com sucesso!")

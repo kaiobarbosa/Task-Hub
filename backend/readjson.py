@@ -92,6 +92,35 @@ def search_tasks():
         resposta_erro.headers.add("Access-Control-Allow-Origin", "*")
         return resposta_erro, 500
 
+@app.route('/api/update-status', methods=['POST', 'OPTIONS'])
+def update_status():
+    # Tratamento de CORS para a requisição preflight do navegador
+    if request.method == 'OPTIONS':
+        resposta_options = app.make_default_options_response()
+        resposta_options.headers.add("Access-Control-Allow-Origin", "*")
+        resposta_options.headers.add("Access-Control-Allow-Headers", "Content-Type")
+        resposta_options.headers.add("Access-Control-Allow-Methods", "POST")
+        return resposta_options
+
+    # Recebe os dados enviados pelo JavaScript (ID da tarefa e novo status)
+    dados = request.get_json()
+    task_id = dados.get('id')
+    novo_status = dados.get('status')
+    
+    print(f"--- Recebido pedido de atualização: Tarefa {task_id} -> {novo_status} ---")
+    
+    # Chama o main.py para fazer o update
+    resultado = main.atualizar_status_tarefa(task_id, novo_status)
+    
+    # Prepara a resposta
+    resposta = jsonify(resultado)
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    
+    if resultado.get("status") == "sucesso":
+        return resposta, 200
+    else:
+        return resposta, 500
+
 if __name__ == '__main__':
     # Roda o servidor na porta 5001
     app.run(port=5001, debug=True)
