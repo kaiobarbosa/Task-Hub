@@ -1,0 +1,103 @@
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2.5rem;
+  background: rgba(11, 11, 20, 0.95);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+  color: var(--light-purple);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid var(--primary-purple);
+  border-radius: 0.8rem;
+  color: var(--light-purple);
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.6);
+  font-size: 1rem;
+}
+
+.top-nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.top-nav a {
+  color: var(--light-purple);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.6rem 0.9rem;
+  border-radius: 999px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.top-nav a:hover,
+.top-nav a:focus-visible {
+  background: rgba(139, 92, 246, 0.18);
+  transform: translateY(-1px);
+}
+
+.page-content {
+  padding: 2rem 2.5rem 3rem;
+}
+
+.intro {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  background: rgba(18, 18, 37, 0.95);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+}
+
+.intro h1,
+.intro p {
+  color: var(--light-purple);
+}
+
+.intro h1 {
+  margin-bottom: 0.8rem;
+  font-size: 2rem;
+}
+
+.intro p {
+  line-height: 1.7;
+}
+
+@media (max-width: 700px) {
+  .site-header {
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1rem 1.2rem;
+  }
+
+  .top-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .page-content {
+    padding: 1.2rem;
+  }
+
+  .intro {
+    padding: 1.3rem;
+  }
+}

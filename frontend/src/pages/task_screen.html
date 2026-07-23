@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks | TASK-HUB</title>
+
+    <link rel="stylesheet" href="../assets/style/navbar.css">
+    <link rel="stylesheet" href="../assets/style/index_css/navbar_index.css">
+    <link rel="stylesheet" href="../assets/style/tasks/tasks.css">
+
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <main class="tasks-page">
+      <section class="tasks-hero" aria-label="Área de tasks">
+        <div class="hero-panel">
+          <div class="hero-copy">
+            <p class="eyebrow">Nova oportunidade</p>
+            <h2>Crie uma nova task com organização e clareza.</h2>
+          </div>
+
+          <input class="task-toggle" id="task-toggle" type="checkbox" />
+          <label class="create-task-btn" for="task-toggle">+ Criar uma task</label>
+
+          <form class="task-form hidden-form">
+            <div class="form-group">
+              <label for="task-name">Nome da task</label>
+              <input id="task-name" type="text" placeholder="Digite o nome da task..." />
+            </div>
+
+            <div class="form-group">
+              <label for="task-description">Descrição</label>
+              <textarea id="task-description" placeholder="Digite a descriçao da task..."></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="task-priority">Nível</label>
+                <select id="task-priority">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+
+              <div class="form-actions">
+                
+                <button class="btn-primary" type="submit">Criar task</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="tasks-list-section" aria-label="Lista de tasks">
+        <div class="tasks-list-header">
+          <h1>Minhas Tasks</h1>
+          <span class="status-pill">organize seu dia</span>
+        </div>
+
+        <ul class="tasks-list" id="tasks-list">
+          <li class="task-item">
+            <label class="task-label">
+              <input class="task-checkbox" type="checkbox" />
+              <span class="task-title">Planejar sprint</span>
+            </label>
+            <div class="task-actions">
+              <span class="task-status pending">Pendente</span>
+              <button class="task-edit-btn" type="button" aria-label="Editar task">✎</button>
+            </div>
+          </li>
+
+          <li class="task-item">
+            <label class="task-label">
+              <input class="task-checkbox" type="checkbox" checked />
+              <span class="task-title">Revisar mockups</span>
+            </label>
+            <div class="task-actions">
+              <span class="task-status done">Concluído</span>
+              <button class="task-edit-btn" type="button" aria-label="Editar task">✎</button>
+            </div>
+          </li>
+
+          <li class="task-item">
+            <label class="task-label">
+              <input class="task-checkbox" type="checkbox" />
+              <span class="task-title">Atualizar backlog</span>
+            </label>
+            <div class="task-actions">
+              <span class="task-status pending">Pendente</span>
+              <button class="task-edit-btn" type="button" aria-label="Editar task">✎</button>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <script src="../components/navbar.js"></script>
+    <script src="../utils/task_status_update.js"></script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Página inicial do TASK-HUB." />
+    <title>Home | TASK-HUB</title>
+
+    <link rel="stylesheet" href="../assets/style/navbar.css" />
+    <link rel="stylesheet" href="../assets/style/index_css/navbar_index.css" />
+    <link rel="stylesheet" href="../assets/style/home/home.css" />
+  </head>
+  <body>
+    <div id="navbar-container"></div>
+
+    <main class="home-main" id="home">
+      <section class="home-hero" aria-label="Área principal">
+        <article class="hero-card hero-list">
+          <div class="card-header">
+            <h2>Resumo das tasks</h2>
+            <span class="status-pill">em andamento</span>
+          </div>
+
+          <ul class="task-list">
+            <li>
+              <span>Planejar sprint</span>
+              <span class="task-status pending">Pendente</span>
+            </li>
+            <li>
+              <span>Revisar mockups</span>
+              <span class="task-status done">Concluído</span>
+            </li>
+            <li>
+              <span>Atualizar backlog</span>
+              <span class="task-status pending">Pendente</span>
+            </li>
+            <li>
+              <span>Preparar entrega</span>
+              <span class="task-status done">Concluído</span>
+            </li>
+            <li>
+              <span>Validar feedback</span>
+              <span class="task-status pending">Pendente</span>
+            </li>
+          </ul>
+        </article>
+
+        <div class="hero-side">
+          <article class="hero-card hero-calendar">
+            <div class="card-header">
+              <h2>Calendário</h2>
+              <span class="status-pill subtle">marcação manual</span>
+            </div>
+
+            <div class="calendar-weekdays">
+              <span>D</span>
+              <span>S</span>
+              <span>T</span>
+              <span>Q</span>
+              <span>Q</span>
+              <span>S</span>
+              <span>S</span>
+            </div>
+
+            <div class="calendar-grid">
+              <button class="calendar-day">1</button>
+              <button class="calendar-day">2</button>
+              <button class="calendar-day">3</button>
+              <button class="calendar-day selected">4</button>
+              <button class="calendar-day">5</button>
+              <button class="calendar-day selected">6</button>
+              <button class="calendar-day">7</button>
+              <button class="calendar-day">8</button>
+              <button class="calendar-day">9</button>
+              <button class="calendar-day selected">10</button>
+              <button class="calendar-day">11</button>
+              <button class="calendar-day">12</button>
+              <button class="calendar-day">13</button>
+              <button class="calendar-day">14</button>
+              <button class="calendar-day">15</button>
+            </div>
+          </article>
+
+          <article class="hero-card hero-streak">
+            <div class="card-header">
+              <h2>Contribuições</h2>
+              <span class="status-pill success">Semanal</span>
+            </div>
+
+            <div class="contributions-graph" aria-label="Gráfico de contribuições das tasks concluídas">
+              <div class="graph-week">
+                <span class="graph-cell level-0"></span>
+                <span class="graph-cell level-1"></span>
+                <span class="graph-cell level-0"></span>
+                <span class="graph-cell level-0"></span>
+                <span class="graph-cell level-0"></span>
+                <span class="graph-cell level-0"></span>
+                <span class="graph-cell level-0"></span>
+              </div>
+              <div class="graph-week">
+                <span class="graph-cell level-1"></span>
+                <span class="graph-cell level-2"></span>
+                <span class="graph-cell level-3"></span>
+                <span class="graph-cell level-2"></span>
+                <span class="graph-cell level-1"></span>
+                <span class="graph-cell level-0"></span>
+                <span class="graph-cell level-2"></span>
+              </div>
+              <div class="graph-week">
+                <span class="graph-cell level-0"></span>
+                <span class="graph-cell level-2"></span>
+                <span class="graph-cell level-1"></span>
+                <span class="graph-cell level-3"></span>
+                <span class="graph-cell level-2"></span>
+                <span class="graph-cell level-1"></span>
+                <span class="graph-cell level-2"></span>
+              </div>
+              <div class="graph-week">
+                <span class="graph-cell level-2"></span>
+                <span class="graph-cell level-3"></span>
+                <span class="graph-cell level-2"></span>
+                <span class="graph-cell level-1"></span>
+                <span class="graph-cell level-0"></span>
+                <span class="graph-cell level-1"></span>
+                <span class="graph-cell level-0"></span>
+              </div>
+            </div>
+
+            <div class="graph-legend">
+              <span>Menos</span>
+              <span class="graph-cell level-0"></span>
+              <span class="graph-cell level-1"></span>
+              <span class="graph-cell level-2"></span>
+              <span class="graph-cell level-3"></span>
+              <span>Mais</span>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="../components/navbar.js"></script>
+  </body>
+</html>
