@@ -1,14 +1,15 @@
 from config.connection_db import database_connector
 
-def insert_new_user(name, lastname, tel_number, email, password):
+def insert_new_user(sql, values):
     connection = database_connector()
     cursor = connection.cursor()
 
-    query = "INSERT INTO users (name_user, lastname_user, tel_number, email, password) VALUES (%s, %s, %s, %s, %s)"
-    cursor.execute(query, (name, lastname, tel_number, email, password))
+    cursor.execute(sql, values)
     connection.commit()
+
     cursor.close()
     connection.close()
+
     if cursor.rowcount > 0:
         return True
     return False
