@@ -1,11 +1,10 @@
 from config.connection_db import database_connector
 
-def select_user():
+def select_user(sql):
     connection = database_connector()
     cursor = connection.cursor()
 
-    query = "SELECT * FROM users"
-    cursor.execute(query)
+    cursor.execute(sql)
     result = cursor.fetchall()
     
     cursor.close()

@@ -29,7 +29,7 @@
 
         <div class="auth-stage">
           <div class="auth-track">
-            <form class="auth-form login-form" action="#" method="post">
+            <form class="auth-form login-form" action="#" method="post" id="login-form">
               <div class="form-content">
                 <h1>Bem Vindo</h1>
 
@@ -75,18 +75,18 @@
                   <label class="switch-link" for="show-register">Crie aqui.</label>
                 </p>
 
-                <button class="submit-button" type="submit">Entrar</button>
+                <button class="submit-button" id="login-submit" type="submit">Entrar</button>
               </div>
             </form>
 
-            <form class="auth-form register-form" action="#" method="post">
+            <form class="auth-form register-form" action="#" method="post" id="register-form">
               <div class="form-content">
                 <h2>Crie sua conta</h2>
 
                 <div class="field">
-                  <label for="register-first-name">Nome</label>
+                  <label for="name_user">Nome</label>
                   <input
-                    id="register-first-name"
+                    id="name_user"
                     name="first-name"
                     type="text"
                     autocomplete="given-name"
@@ -96,9 +96,9 @@
                 </div>
 
                 <div class="field">
-                  <label for="register-last-name">Sobrenome</label>
+                  <label for="lastname_user">Sobrenome</label>
                   <input
-                    id="register-last-name"
+                    id="lastname_user"
                     name="last-name"
                     type="text"
                     autocomplete="family-name"
@@ -108,9 +108,9 @@
                 </div>
 
                 <div class="field">
-                  <label for="register-phone">Número de telefone</label>
+                  <label for="tel_number_user">Número de telefone</label>
                   <input
-                    id="register-phone"
+                    id="tel_number_user"
                     name="phone"
                     type="tel"
                     autocomplete="tel"
@@ -120,9 +120,9 @@
                 </div>
 
                 <div class="field">
-                  <label for="register-email">E-mail</label>
+                  <label for="email_user">E-mail</label>
                   <input
-                    id="register-email"
+                    id="email_user"
                     name="email"
                     type="email"
                     autocomplete="email"
@@ -132,10 +132,10 @@
                 </div>
 
                 <div class="field">
-                  <label for="register-password">Senha</label>
+                  <label for="password_user">Senha</label>
                   <div class="password-control">
                     <input
-                      id="register-password"
+                      id="password_user"
                       name="password"
                       type="password"
                       autocomplete="new-password"
@@ -146,8 +146,8 @@
                       class="password-toggle"
                       type="button"
                       data-password-toggle
-                      data-password-target="register-password"
-                      aria-controls="register-password"
+                      data-password-target="password_user"
+                      aria-controls="password_user"
                       aria-pressed="false"
                       aria-label="Mostrar senha"
                     >
@@ -186,12 +186,15 @@
                   <label class="switch-link" for="show-login">Entre aqui.</label>
                 </p>
 
-                <button class="submit-button" type="submit">Criar conta</button>
+                <button class="submit-button" id="register-submit" type="submit">Criar conta</button>
               </div>
             </form>
           </div>
         </div>
       </section>
     </main>
-  </body>
+
+  <script type="module" src="../services/user/record_user.js"></script>
+  <script type="module" src="../services/user/login.js"></script>
+</body>
 </html>

@@ -4,7 +4,7 @@ from flask_cors import CORS
 from user.routes.user_route_insert import user_route_insert
 from user.routes.user_route_update import user_route_update
 from user.routes.user_route_delete import user_route_delete
-from user.routes.user_route_select import user_route_select
+from user.routes.user_route_login import user_route_login
 
 app = Flask(__name__)
 CORS(app)
@@ -12,7 +12,7 @@ CORS(app)
 app.register_blueprint(user_route_insert)
 app.register_blueprint(user_route_update)
 app.register_blueprint(user_route_delete)
-app.register_blueprint(user_route_select)
+app.register_blueprint(user_route_login)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
