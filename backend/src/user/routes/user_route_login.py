@@ -7,15 +7,18 @@ user_route_login = Blueprint('user_route_login', __name__)
 @user_route_login.route('/user_login', methods=['POST'])
 def users_select():
 
+    #Aqui vai ser onde o backend vai coletar as informaçoes vindas do front
+    # json {'email': 'admin@site.com', 'password': 'senha123'}
     data = request.get_json()
+
+    #Aqui ele organiza no formato correto as informacoes vindas do front,  caso venha desorganizado
     user_data = user_sctructure_login(data)
+
+    #Aqui ta sendo criado o sql do select de todos os usuarios
     user_sql = user_model_select()
+    
 
     user_login = user_login_efetuated(user_sql, user_data)
 
-    login_response = {
-        user_login,
-        "retornou"
-    }
+    return user_login
 
-    return jsonify(user_login)

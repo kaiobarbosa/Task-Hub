@@ -4,8 +4,8 @@ const btnLogin = document.querySelector('.login-submit');
 formLogin.addEventListener('submit', async (event) => {
     event.preventDefault(); 
 
-    const email_user = document.getElementById('email_user').value;
-    const password_user = document.getElementById('password_user').value;
+    const email_user = document.getElementById('login-email').value;
+    const password_user = document.getElementById('login-password').value;
 
     const userData = {
         email: email_user,
