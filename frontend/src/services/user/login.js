@@ -15,7 +15,7 @@ formLogin.addEventListener('submit', async (event) => {
     console.log("Dados armazenados", userData);
 
     try {
-        // CORREÇÃO: "fetch" ao invés de "fatch"
+       
         const response = await fetch('http://127.0.0.1:5000/user_login', { 
             method: 'POST',
             headers: {
@@ -27,8 +27,15 @@ formLogin.addEventListener('submit', async (event) => {
         const result = await response.json();
 
         if (response.ok) {
-            alert(result.message || "Login realizado com sucesso!");
+            alert(result.result_request || "Login realizado com sucesso!");
+            
+            const dadosDoUsuario = result.User; 
+            
+            localStorage.setItem('dadosUsuario', JSON.stringify(dadosDoUsuario));
+            
+            
             window.location.href = "home_screen.html";
+
         } else {
             alert("Ops! Erro ao efetuar o login: " + (result.erro || "Verifique os dados")); 
         }
