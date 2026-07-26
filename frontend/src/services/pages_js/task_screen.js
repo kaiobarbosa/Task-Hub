@@ -15,9 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // 1. Renderiza a lista de tasks na esquerda
             renderizarListaTasks(tasks);
-            
-            // 2. Renderiza os dias concluídos no calendário na direita
-            renderizarCalendario(tasks);
+
         })
         .catch(error => console.error("Erro:", error));
         
@@ -26,41 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = "login.html"; 
     }
 });
-
-// Função NOVA: Cuida do destaque verde no calendário
-function renderizarCalendario(tasks) {
-    // A. Seleciona todos os botões de dia do calendário (.calendar-day)
-    const botoesDias = document.querySelectorAll('.calendar-grid .calendar-day');
-
-    // B. Limpa a marcação estática (remove a classe .selected de todos os botões)
-    botoesDias.forEach(botao => botao.classList.remove('selected'));
-
-    // C. Cria um conjunto (Set) com os números dos dias que possuem tasks concluídas
-    const diasCompletos = new Set();
-
-    tasks.forEach(task => {
-        const status = task[6];
-        const dataString = task[4];
-        //AAAA-MM-DD HH:MM:SS
-
-        if (status && status.toLowerCase().includes('conclu') && dataString) {
-            
-            const dataObjeto = new Date(dataString);
-            
-            const diaDoMes = dataObjeto.getDate(); 
-            diasCompletos.add(diaDoMes);
-        }
-    });
-
-    // D. Percorre os botões do HTML e adiciona a classe .selected nos dias correspondentes
-    botoesDias.forEach(botao => {
-        const numeroDoBotao = parseInt(botao.textContent.trim(), 10);
-
-        if (diasCompletos.has(numeroDoBotao)) {
-            botao.classList.add('selected'); // Aplica o fundo verde!
-        }
-    });
-}
 
 function renderizarListaTasks(tasks) {
     const ulTaskList = document.querySelector('.task-list');
@@ -79,9 +42,15 @@ function renderizarListaTasks(tasks) {
             }
 
             tasksHTML += `
-                <li>
-                  <span>${nomeDaTask}</span>
-                  <span class="task-status ${classeStatus}">${statusDaTask}</span>
+                <li class="task-item">
+                    <label class="task-label">
+                        <input class="task-checkbox" type="checkbox" />
+                        <span class="task-title">${nomeDaTask}</span>
+                    </label>
+                    <div class="task-actions">
+                        <span class="task-status pending">${statusDaTask}</span>
+                        <button class="task-edit-btn" type="button" aria-label="Editar task">✎</button>
+                    </div>
                 </li>
             `;
         });

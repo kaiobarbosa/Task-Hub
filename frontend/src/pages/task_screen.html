@@ -55,50 +55,22 @@
         </div>
       </section>
 
+
+      //listagem comeca aqui
       <section class="tasks-list-section" aria-label="Lista de tasks">
         <div class="tasks-list-header">
           <h1>Minhas Tasks</h1>
           <span class="status-pill">organize seu dia</span>
         </div>
 
-        <ul class="tasks-list" id="tasks-list">
-          <li class="task-item">
-            <label class="task-label">
-              <input class="task-checkbox" type="checkbox" />
-              <span class="task-title">Planejar sprint</span>
-            </label>
-            <div class="task-actions">
-              <span class="task-status pending">Pendente</span>
-              <button class="task-edit-btn" type="button" aria-label="Editar task">✎</button>
-            </div>
-          </li>
-
-          <li class="task-item">
-            <label class="task-label">
-              <input class="task-checkbox" type="checkbox" checked />
-              <span class="task-title">Revisar mockups</span>
-            </label>
-            <div class="task-actions">
-              <span class="task-status done">Concluído</span>
-              <button class="task-edit-btn" type="button" aria-label="Editar task">✎</button>
-            </div>
-          </li>
-
-          <li class="task-item">
-            <label class="task-label">
-              <input class="task-checkbox" type="checkbox" />
-              <span class="task-title">Atualizar backlog</span>
-            </label>
-            <div class="task-actions">
-              <span class="task-status pending">Pendente</span>
-              <button class="task-edit-btn" type="button" aria-label="Editar task">✎</button>
-            </div>
-          </li>
+        <ul class="task-list" id="task-list">
         </ul>
       </section>
     </main>
 
     <script src="../components/navbar.js"></script>
-    <script src="../utils/task_status_update.js"></script>
+    <script type="module" src="../services/pages_js/task_screen.js"></script>
+    <script type="module" src="../utils/task_status_update.js"></script>
+
 </body>
 </html>

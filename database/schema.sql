@@ -46,15 +46,14 @@ insert into users (name_user, lastname_user, tel_number, email, password) values
 "aa", "Vitaaor", "(12) 99171-3782", "jvM@gmail.com", "aaaaa"
 );
 
-update users set 
-name_user = "Joao Vitor", 
-lastname_user = "Marques",
-tel_number = "(12) 73799-3433",
-email = "jvM@gmail.com",
-password = "123123" where id = 1;
+update task set 
+status_task = "Concluido"
+where id_task = 2;
 
 delete from users where id = 5;
 
 #drop table task;
 
 SELECT * FROM users;
+SELECT * FROM task;
+
