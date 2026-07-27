@@ -29,7 +29,7 @@ def user_login_efetuated(sql, user_data):
         user_exist_data = select_user_by_email(sql_select_by_email, user_data["email"])
 
         return jsonify({
-            "result_request" : "User exist!",
+            
             "User" : user_exist_data
         }), 200
     else:

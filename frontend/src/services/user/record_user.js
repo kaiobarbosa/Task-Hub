@@ -20,7 +20,7 @@ formCadastro.addEventListener('submit', async (event) => {
     console.log("Dados armazenados", userData);
 
     try {
-        // CORREÇÃO: "fetch" ao invés de "fatch"
+        
         const response = await fetch('http://127.0.0.1:5000/user_insert', { 
             method: 'POST',
             headers: {

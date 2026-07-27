@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const dadosSalvos = localStorage.getItem('dadosUsuario');
-    
+
     if (dadosSalvos) {
         const usuarioLogado = JSON.parse(dadosSalvos);
         const idUsuario = usuarioLogado[0][0]; 
@@ -49,7 +49,8 @@ function renderizarListaTasks(tasks) {
                     </label>
                     <div class="task-actions">
                         <span class="task-status pending">${statusDaTask}</span>
-                        <button class="task-edit-btn" type="button" aria-label="Editar task">✎</button>
+                        <button class="task-edit-btn" type="button" aria-label="Editar task">✏️</button>
+                        <button class="task-edit-btn" type="button" aria-label="Editar task">🗑️</button>
                     </div>
                 </li>
             `;
@@ -60,3 +61,48 @@ function renderizarListaTasks(tasks) {
         ulTaskList.innerHTML = '<li><span style="color: #666;">Nenhuma task cadastrada ainda.</span></li>';
     }
 }
+const formCreate = document.querySelector('.tasks-hero');
+const btnCreate = document.querySelector('.btn-submit');
+
+formCreate.addEventListener("submit", async (event) => {
+
+     const dadosSalvos = localStorage.getItem('dadosUsuario');
+     const dadosUser = JSON.parse(dadosSalvos)
+
+     const inputNameTask = document.getElementById('task-name').value;
+     const inputDescTask = document.getElementById('task-description').value;
+     const idUsuario = dadosUser[0][0];
+
+     const tasks_data={
+        name: inputNameTask,
+        description: inputDescTask,
+        id_user: idUsuario
+     }
+     
+     console.log(tasks_data)
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/task_insert', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(tasks_data)
+        });
+        
+        const result = await response.json();
+
+        if (response.ok) {
+            alert(result.message || "Cadastro realizado com sucesso!");
+        } else {
+            alert("Ops! Erro ao cadastrar: " + (result.erro || "Verifique os dados")); 
+        }
+
+    } catch (error) {
+        console.error("Erro de conexão com o servidor:", error);
+        alert("Não foi possível conectar ao servidor. Verifique se o Flask está rodando.");
+    } finally {
+        
+    }
+
+});

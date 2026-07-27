@@ -27,7 +27,6 @@ formLogin.addEventListener('submit', async (event) => {
         const result = await response.json();
 
         if (response.ok) {
-            alert(result.result_request || "Login realizado com sucesso!");
             
             const dadosDoUsuario = result.User; 
             
