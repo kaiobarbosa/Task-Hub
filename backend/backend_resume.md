@@ -21,7 +21,7 @@ Model View Controller
 [service] (Vou usar o molde do Usuário para salvar isso no banco)
     │ 
     ▼
-[models] (vai montar a estrutura que vai ser impressa no comando sql)
+[models] (vai montar a estrutura que vai ser impressa no comando sql, montar o comando sql e os dados da maneira a ser impressa no comando sql necessario)
     │ 
     ▼
-[usecase] (vai executar, propriamente dito, o comando sql)
+[usecase] (vai executar, propriamente dito, o comando sql.)
