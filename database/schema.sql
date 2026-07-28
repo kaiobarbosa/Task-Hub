@@ -1,3 +1,5 @@
+SET GLOBAL event_scheduler = ON;
+
 create database th_database;
 use th_database;
 
@@ -22,6 +24,22 @@ foreign key(id_user) references users(id)
 );
 
 DELIMITER $$
+
+CREATE TRIGGER trg_set_date_complete
+BEFORE UPDATE ON task
+FOR EACH ROW
+BEGIN
+    IF NEW.status_task = 'concluido' AND OLD.status_task != 'concluido' THEN
+        SET NEW.date_complete = CURRENT_TIMESTAMP;
+    
+    ELSEIF NEW.status_task != 'concluido' AND OLD.status_task = 'concluido' THEN
+        SET NEW.date_complete = NULL;
+    END IF;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
 CREATE TRIGGER trg_insert_status_task
 BEFORE INSERT ON task
 FOR EACH ROW
@@ -39,21 +57,15 @@ BEGIN
 END$$
 DELIMITER ;
 
-insert into task (id_user, name_task, description_task) values(
-16, "task teste", "esta task e apenas um teste no banco de dados");
+DELIMITER $$
 
-insert into users (name_user, lastname_user, tel_number, email, password) values (
-"aa", "Vitaaor", "(12) 99171-3782", "jvM@gmail.com", "aaaaa"
-);
+CREATE EVENT ev_delete_completed_tasks
+ON SCHEDULE EVERY 1 HOUR
+DO
+BEGIN
+    DELETE FROM task 
+    WHERE status_task = 'Concluido' 
+      AND date_complete <= NOW() - INTERVAL 24 HOUR;
+END$$
 
-update task set 
-status_task = "Concluido"
-where id_task = 2;
-
-delete from users where id = 5;
-
-#drop table task;
-
-SELECT * FROM users;
-SELECT * FROM task;
-
+DELIMITER ;
