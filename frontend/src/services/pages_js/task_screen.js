@@ -38,19 +38,22 @@ function renderizarListaTasks(tasks) {
             const statusDaTask = task[6]; 
 
             let classeStatus = 'pending'; 
+            let atributoChecked = '';
             if (statusDaTask && statusDaTask.toLowerCase().includes('conclu')) {
                 classeStatus = 'done';
+                atributoChecked = 'checked'
             }
+
 
             tasksHTML += `
                 <li class="task-item">
                     <label class="task-label">
-                        <input class="task-checkbox" type="checkbox" />
+                        <input class="task-checkbox" type="checkbox" ${atributoChecked} />
                         <span class="id_da_task">${idTask}</span>
                         <span class="task-title">${nomeDaTask}</span>
                     </label>
                     <div class="task-actions">
-                        <span class="task-status pending">${statusDaTask}</span>
+                        <span class="task-status ${classeStatus}">${statusDaTask}</span>
                         <button class="task-edit-btn" type="button" aria-label="Editar task">✏️</button>
                         <button class="task-edit-btn" type="button" aria-label="Editar task">🗑️</button>
                     </div>
