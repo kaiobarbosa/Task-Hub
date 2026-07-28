@@ -64,6 +64,37 @@ function renderizarListaTasks(tasks) {
 const formCreate = document.querySelector('.tasks-hero');
 const btnCreate = document.querySelector('.btn-submit');
 
+const containerDeTasks = document.querySelector('.task-list');
+
+containerDeTasks.addEventListener('click', async (event) => {
+    // 2. Verifica se o clique foi em um checkbox E se tem a classe verdadeira do seu projeto
+    if (event.target.type === 'checkbox' && event.target.classList.contains('task-checkbox')) {
+        const taskItems = document.querySelectorAll('.task-item');
+        taskItems.forEach((item) => {
+        const checkbox = item.querySelector('.task-checkbox');
+        const status = item.querySelector('.task-status');
+
+        const updateStatus = () => {
+            const completed = checkbox.checked;
+            item.classList.toggle('completed', completed);
+
+            if (completed) {
+                status.textContent = 'Concluído';
+                status.classList.remove('pending');
+                status.classList.add('done');
+            } else {
+                status.textContent = 'Pendente';
+                status.classList.remove('done');
+                status.classList.add('pending');
+            }
+        };
+
+    checkbox.addEventListener('change', updateStatus);
+    updateStatus();
+    });
+    }
+});
+
 formCreate.addEventListener("submit", async (event) => {
 
      const dadosSalvos = localStorage.getItem('dadosUsuario');
