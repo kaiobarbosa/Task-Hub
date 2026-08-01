@@ -207,10 +207,9 @@ body {
 }
 
 .task-list {
-
-  list-style: none; 
-  padding-left: 0;  
-  margin: 0;        
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
@@ -228,6 +227,118 @@ body {
   border: 1px solid rgba(139, 92, 246, 0.2);
   border-radius: 0.8rem;
   color: var(--text-color);
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(139, 92, 246, 0.24);
+  border-radius: 0.9rem;
+  background: rgba(139, 92, 246, 0.08);
+}
+
+.task-item.is-editing {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.8rem;
+}
+
+.task-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  cursor: pointer;
+}
+
+.task-checkbox {
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: var(--primary-purple);
+  background-color: rgba(139, 92, 246, 0.14);
+  border: 1px solid var(--primary-purple);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.task-title {
+  color: var(--text-color);
+}
+
+.task-item.completed .task-title {
+  color: var(--text-color);
+  text-decoration: line-through;
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-left: auto;
+  flex-direction: row-reverse;
+}
+
+.task-edit-btn {
+  border: 1px solid var(--primary-purple);
+  background: transparent;
+  color: var(--light-purple);
+  border-radius: 0.6rem;
+  padding: 0.35rem 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.task-edit-btn:hover {
+  background: rgba(139, 92, 246, 0.16);
+  transform: translateY(-1px);
+}
+
+.task-edit-btn.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.task-edit-form {
+  display: grid;
+  gap: 0.7rem;
+  padding: 0.85rem;
+  border: 1px solid rgba(139, 92, 246, 0.24);
+  border-radius: 0.9rem;
+  background: rgba(11, 11, 20, 0.72);
+}
+
+.task-edit-form input,
+.task-edit-form textarea {
+  width: 100%;
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-color);
+  padding: 0.7rem 0.8rem;
+  font: inherit;
+}
+
+.task-edit-form textarea {
+  min-height: 5rem;
+  max-height: 8rem;
+  resize: vertical;
+  overflow-y: auto;
+}
+
+.task-edit-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.task-edit-form .btn-primary,
+.task-edit-form .btn-secondary {
+  padding: 0.6rem 0.85rem;
 }
 
 .task-item {

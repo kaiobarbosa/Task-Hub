@@ -45,3 +45,18 @@
     - quando o usuario clicar no botao de criar a task, o formulario tambem voltara a ficar escondido, exibindo apenas o botao original da div superior.
 
     - Vou deixar a organizacao dos componentes por sua conta, quero algo bem organizado, agradavel de se ver e que seja sofisticado. Me surpreenda
+
+
+# Update section
+
+    - Faça, do jeito que voce achar melhor, a opcao de alterar os dados da task.
+
+    - O botao de editar a task, task-edit-btn. update, que esta sendo criada via javaScript no arquivo 'task_screen.js',  devera abrir a opcao de editar os dados da task cujo o botao foi clicado.
+
+        - DADOS QUE PODERAO SER ALTERADOS: NOME E DESCRICAO
+            - Faca dois inputs com os seguintes placeholders: 
+                - Novo nome da task
+                - Nova descricao da task
+        - ADICIONE TAMBEM UM BOTAO PARA SALVAR AS ALTERACOES
+
+    - A janela devera ser a mesma, eu recomendaria expandir para baixo a div da task em questao
