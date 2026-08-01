@@ -54,8 +54,8 @@ function renderizarListaTasks(tasks) {
                     </label>
                     <div class="task-actions">
                         <span class="task-status ${classeStatus}">${statusDaTask}</span>
-                        <button class="task-edit-btn" type="button" aria-label="Editar task">✏️</button>
-                        <button class="task-edit-btn" type="button" aria-label="Editar task">🗑️</button>
+                        <button class="task-edit-btn update" type="button" aria-label="Editar task">✏️</button>
+                        <button class="task-edit-btn delete" type="button" aria-label="Editar task">🗑️</button>
                     </div>
                 </li>
             `;
@@ -104,6 +104,43 @@ containerDeTasks.addEventListener('change', (event) => {
         
             updateTaskStatus(completed, idTask);
         }
+    }
+});
+
+ containerDeTasks.addEventListener('click', async (event) => {
+    if (event.target.classList.contains('delete')) {
+        const taskItem = event.target.closest('.task-item');
+        const idTaskTexto = taskItem.querySelector('.id_da_task').textContent.trim();
+        const idTask = parseInt(idTaskTexto, 10);
+
+        const dataJson = {
+            "idTask" : idTask
+        }
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/task_delete', { 
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataJson)
+        });
+            
+            const result = await response.json();
+
+            if (response.ok) {
+                alert(result.message || "atualizaçao realizada com sucesso!");
+                window.location.reload();
+            } else {
+                alert("Ops! Erro ao atualizar: " + (result.erro || "Verifique os dados")); 
+            }
+
+        } catch (error) {
+            console.error("Erro de conexão com o servidor:", error);
+            alert("Não foi possível conectar ao servidor. Verifique se o Flask está rodando.");
+        }
+
+        console.log(`Delete button click identificado para a task ${idTask}`);
     }
 });
 

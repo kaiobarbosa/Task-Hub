@@ -9,6 +9,7 @@ from user.routes.user_route_login import user_route_login
 from task.routes.task_route_select import task_route_select
 from task.routes.task_route_insert import task_route_insert
 from task.routes.task_route_update_status import task_route_update_status
+from task.routes.task_route_delete import task_route_delete
 
 app = Flask(__name__)
 CORS(app)
@@ -21,6 +22,7 @@ app.register_blueprint(user_route_login)
 app.register_blueprint(task_route_select)
 app.register_blueprint(task_route_insert)
 app.register_blueprint(task_route_update_status)
+app.register_blueprint(task_route_delete)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
