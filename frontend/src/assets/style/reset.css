@@ -1,0 +1,55 @@
+/* 1. Usa um modelo de caixa (box model) mais intuitivo */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove as margens e preenchimentos padrão de todos os elementos */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 3. Permite rolagem suave ao clicar em links âncora */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 4. Altura mínima de 100% da tela e tipografia base */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased; /* Suaviza as fontes no macOS */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 5. Torna as mídias responsivas e remove espaços em branco indesejados */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 6. Herda as fontes padrão nos elementos de formulário */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 7. Evita que palavras muito longas quebrem o layout */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* 8. Remove estilos de listas por padrão */
+ul, ol {
+  list-style: none;
+}
+
+/* 9. Remove os sublinhados e cores padrão de links (Opcional, mas útil) */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 10. Cria um contexto de empilhamento (útil se estiver usando React/Next.js/Vue) */
+#root, #__next {
+  isolation: isolate;
+}
