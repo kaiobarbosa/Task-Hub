@@ -207,11 +207,11 @@ function abrirEdicao(taskItem) {
     editForm.innerHTML = `
         <label class="form-group">
             <span>Novo nome da task</span>
-            <input type="text" placeholder="Novo nome da task" />
+            <input type="text" id="edit-task-name" placeholder="Novo nome da task" />
         </label>
         <label class="form-group">
             <span>Nova descrição da task</span>
-            <textarea placeholder="Nova descrição da task"></textarea>
+            <textarea id="edit-task-description" placeholder="Nova descrição da task"></textarea>
         </label>
         <div class="task-edit-form-actions">
             <button class="btn-secondary" type="button">Cancelar</button>
@@ -233,11 +233,15 @@ function abrirEdicao(taskItem) {
 
     const saveBtn = editForm.querySelector('.btn-primary');
     saveBtn.addEventListener('click', () => {
-        const inputName = editForm.querySelector('input[type="text"]');
+        const inputName = editForm.querySelector('#edit-task-name');
+        const inputDesc = editForm.querySelector('#edit-task-description');
         const titleElement = taskItem.querySelector('.task-title');
 
         if (inputName && titleElement && inputName.value.trim()) {
             titleElement.textContent = inputName.value.trim();
+
+            updateTaskName(taskItem, inputName.value.trim(), inputDesc.value.trim());
+
         }
 
         taskItem.classList.remove('is-editing');
@@ -247,6 +251,40 @@ function abrirEdicao(taskItem) {
         }
         editForm.remove();
     });
+}
+
+async function updateTaskName(taskItem, newName, newDescription) {
+    const idTaskTexto = taskItem.querySelector('.id_da_task').textContent.trim();
+    const idTask = parseInt(idTaskTexto, 10);
+    
+    const dataJson = {
+        id_task: idTask,
+        new_name: newName,
+        new_description: newDescription
+    };
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/task_update_name_description', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dataJson)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert(result.message || 'Atualização realizada com sucesso!');
+            const idUsuario = obterIdUsuarioAtual();
+            if (idUsuario) {
+                await carregarTasksDoUsuario(idUsuario);
+            }
+        } else {
+            taskItem.remove();
+        }
+    } catch (error) {
+        console.error('Erro de conexão com o servidor:', error);
+        alert('Não foi possível conectar ao servidor. Verifique se o Flask está rodando.');
+    }
 }
 
 async function updateTaskStatus(completed, idTask) {
