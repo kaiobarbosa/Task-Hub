@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request, Blueprint, make_response
 from flask_cors import CORS
+import os
 
 from user.routes.user_route_insert import user_route_insert
 from user.routes.user_route_update import user_route_update
@@ -14,6 +15,8 @@ from task.routes.task_route_update_name_description import task_route_update_nam
 
 app = Flask(__name__)
 CORS(app)
+UPLOAD_FOLDER = 'static/uploads/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 app.register_blueprint(user_route_insert)
 app.register_blueprint(user_route_update)
