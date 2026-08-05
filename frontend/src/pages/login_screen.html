@@ -83,110 +83,126 @@
               <div class="form-content">
                 <h2>Crie sua conta</h2>
 
-                <div class="field">
-                  <label for="name_user">Nome</label>
-                  <input
-                    id="name_user"
-                    name="first-name"
-                    type="text"
-                    autocomplete="given-name"
-                    placeholder="Digite o seu nome..."
-                    required
-                  />
-                </div>
+                <div class="register-grid">
+                  <div class="register-main">
+                    <div class="field">
+                      <label for="name_user">Nome</label>
+                      <input
+                        id="name_user"
+                        name="first-name"
+                        type="text"
+                        autocomplete="given-name"
+                        placeholder="Digite o seu nome..."
+                        required
+                      />
+                    </div>
 
-                <div class="field">
-                  <label for="lastname_user">Sobrenome</label>
-                  <input
-                    id="lastname_user"
-                    name="last-name"
-                    type="text"
-                    autocomplete="family-name"
-                    placeholder="Digite o seu sobrenome..."
-                    required
-                  />
-                </div>
+                    <div class="field">
+                      <label for="lastname_user">Sobrenome</label>
+                      <input
+                        id="lastname_user"
+                        name="last-name"
+                        type="text"
+                        autocomplete="family-name"
+                        placeholder="Digite o seu sobrenome..."
+                        required
+                      />
+                    </div>
 
-                <div class="field">
-                  <label for="tel_number_user">Número de telefone</label>
-                  <input
-                    id="tel_number_user"
-                    name="phone"
-                    type="tel"
-                    autocomplete="tel"
-                    placeholder="Digite a seu numero de telefone..."
-                    required
-                  />
-                </div>
+                    <div class="field">
+                      <label for="tel_number_user">Número de telefone</label>
+                      <input
+                        id="tel_number_user"
+                        name="phone"
+                        type="tel"
+                        autocomplete="tel"
+                        placeholder="Digite a seu numero de telefone..."
+                        required
+                      />
+                    </div>
 
-                <div class="field">
-                  <label for="email_user">E-mail</label>
-                  <input
-                    id="email_user"
-                    name="email"
-                    type="email"
-                    autocomplete="email"
-                    placeholder="Digite o seu email..."
-                    required
-                  />
-                </div>
+                    <div class="field">
+                      <label for="email_user">E-mail</label>
+                      <input
+                        id="email_user"
+                        name="email"
+                        type="email"
+                        autocomplete="email"
+                        placeholder="Digite o seu email..."
+                        required
+                      />
+                    </div>
 
-                <div class="field">
-                  <label for="password_user">Senha</label>
-                  <div class="password-control">
-                    <input
-                      id="password_user"
-                      name="password"
-                      type="password"
-                      autocomplete="new-password"
-                      placeholder="Digite o sua senha..."
-                      required
-                    />
-                    <button
-                      class="password-toggle"
-                      type="button"
-                      data-password-toggle
-                      data-password-target="password_user"
-                      aria-controls="password_user"
-                      aria-pressed="false"
-                      aria-label="Mostrar senha"
-                    >
-                      Mostrar
-                    </button>
+                    <div class="field">
+                      <label for="password_user">Senha</label>
+                      <div class="password-control">
+                        <input
+                          id="password_user"
+                          name="password"
+                          type="password"
+                          autocomplete="new-password"
+                          placeholder="Digite o sua senha..."
+                          required
+                        />
+                        <button
+                          class="password-toggle"
+                          type="button"
+                          data-password-toggle
+                          data-password-target="password_user"
+                          aria-controls="password_user"
+                          aria-pressed="false"
+                          aria-label="Mostrar senha"
+                        >
+                          Mostrar
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="field">
+                      <label for="register-password-confirmation">Confirmar senha</label>
+                      <div class="password-control">
+                        <input
+                          id="register-password-confirmation"
+                          name="password-confirmation"
+                          type="password"
+                          autocomplete="new-password"
+                          placeholder="Digite novamente a senha..."
+                          required
+                        />
+                        <button
+                          class="password-toggle"
+                          type="button"
+                          data-password-toggle
+                          data-password-target="register-password-confirmation"
+                          aria-controls="register-password-confirmation"
+                          aria-pressed="false"
+                          aria-label="Mostrar senha"
+                        >
+                          Mostrar
+                        </button>
+                      </div>
+                    </div>
+
+                    <p class="form-switch">
+                      Já tem uma conta?
+                      <label class="switch-link" for="show-login">Entre aqui.</label>
+                    </p>
                   </div>
+
+                  <aside class="register-side">
+                    <div class="avatar-card">
+                      <label class="avatar-picker avatar-picker-register" for="register-avatar-input" aria-label="Selecionar imagem de perfil">
+                        <input id="register-avatar-input" type="file" accept="image/png, image/jpeg" hidden />
+                        <span class="avatar-placeholder">+</span>
+                        <p>Clique para adicionar uma foto</p>
+                      </label>
+                    </div>
+
+                    <div class="register-actions">
+                      <button class="submit-button" id="register-submit" type="submit">Criar conta</button>
+                    </div>
+                  </aside>
                 </div>
-
-                <div class="field">
-                  <label for="register-password-confirmation">Confirmar senha</label>
-                  <div class="password-control">
-                    <input
-                      id="register-password-confirmation"
-                      name="password-confirmation"
-                      type="password"
-                      autocomplete="new-password"
-                      placeholder="Digite novamente a senha..."
-                      required
-                    />
-                    <button
-                      class="password-toggle"
-                      type="button"
-                      data-password-toggle
-                      data-password-target="register-password-confirmation"
-                      aria-controls="register-password-confirmation"
-                      aria-pressed="false"
-                      aria-label="Mostrar senha"
-                    >
-                      Mostrar
-                    </button>
-                  </div>
-                </div>
-
-                <p class="form-switch">
-                  Já tem uma conta?
-                  <label class="switch-link" for="show-login">Entre aqui.</label>
-                </p>
-
-                <button class="submit-button" id="register-submit" type="submit">Criar conta</button>
               </div>
             </form>
           </div>
