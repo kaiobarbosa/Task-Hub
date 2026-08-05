@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usuário | TASK-HUB</title>
+  <link rel="stylesheet" href="../assets/style/reset.css" />
+  <link rel="stylesheet" href="../assets/style/navbar.css" />
+  <link rel="stylesheet" href="../assets/style/index_css/navbar_index.css" />
+  <link rel="stylesheet" href="../assets/style/user/user_style.css" />
+</head>
+<body>
+  <div id="navbar-container"></div>
+
+  <main class="user-page">
+    <section class="user-card" aria-label="Informações do usuário">
+      <div class="user-panel user-panel-left">
+        <div class="panel-heading">
+          <p class="eyebrow">Perfil</p>
+          <h1>Edite suas informações</h1>
+        </div>
+
+        <form class="user-form" id="user-form">
+          <div class="form-row">
+            <label class="field-group">
+              <span>Nome</span>
+              <div class="field-with-action">
+                <input type="text" value="EDUARDO" />
+              </div>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label class="field-group">
+              <span>Sobrenome</span>
+              <div class="field-with-action">
+                <input type="text" value="HENRIQUE" />
+              </div>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label class="field-group">
+              <span>Telefone</span>
+              <div class="field-with-action">
+                <input type="text" value="(12) 99701-9156" />
+              </div>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label class="field-group">
+              <span>E-mail</span>
+              <div class="field-with-action">
+                <input type="email" value="kaio.bragab@gmail.com" />
+              </div>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label class="field-group">
+              <span>Senha</span>
+              <div class="field-with-action password-field">
+                <input id="user-password" type="password" value="123123" />
+                <div class="password-actions">
+                  <button type="button" class="icon-btn" data-password-toggle data-password-target="user-password" aria-label="Mostrar senha">👁</button>
+                </div>
+              </div>
+            </label>
+          </div>
+        </form>
+      </div>
+
+      <div class="user-panel user-panel-right">
+        <div class="avatar-section">
+          <label class="avatar-picker" for="avatar-input" aria-label="Selecionar imagem de perfil">
+            <input id="avatar-input" type="file" accept="image/png, image/jpeg" hidden />
+            <span class="avatar-placeholder">+</span>
+            <p>Clique para adicionar uma foto</p>
+          </label>
+
+          <button type="button" class="confirm-btn" id="confirm-updates" disabled>Confirmar alterações</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../components/navbar.js"></script>
+  <script src="../utils/show_password.js"></script>
+  <script type="module" src="../services/pages_js/user_screen.js"></script>
+</body>
+</html>

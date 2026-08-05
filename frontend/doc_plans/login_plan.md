@@ -42,3 +42,13 @@ Lembre-se tambem que o arquvio html esta em pages
     frontend/src/pages/login_screen.html        
              
 
+# Second Sprint 04/08
+
+- Implementacao da inclusao de uma imagem de perfil ao cadastrar-se
+
+    - baseado na implementacao feita na tela de upload de dados do usuario, localizada em: frontend/src/services/page_js/user_screen.js e frontend/src/pages/user_screen.html, crie uma opcao para o usuario incluir uma imagem de perfil.
+
+        - o Usuario nao é obrigado a incluir uma foto de perfil, é o unico campo no qual deve ser opcional ao se cadastrar.
+        - ao adicionar a imagem, a mesma deve ser exibida no campo de incluir a imagem
+            - a campo deve ser igual ao da tela de edicao das informacoes do usuario, citada anteriormente... um campo circular que ao clicar abre o explorador de arquivo para a escolha da imagem.
+        

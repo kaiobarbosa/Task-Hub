@@ -5,7 +5,8 @@ def user_sctructure_insert(data):
         "lastname": data.get("lastname"),
         "tel_number": data.get("tel_number"),
         "email": data.get("email"),
-        "password": data.get("password")
+        "password": data.get("password"),
+        "imageProfile": data.get("imageProfile")
     }
     
     return user

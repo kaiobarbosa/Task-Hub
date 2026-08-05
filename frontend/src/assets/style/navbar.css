@@ -30,7 +30,10 @@
   border: 2px solid var(--primary-purple);
   border-radius: 50%;
   background: radial-gradient(circle at 38% 32%, var(--light-purple), #5f3bb0 72%);
+  background-size: cover;
+  background-position: center;
   box-shadow: 0 0 0.75rem rgba(139, 92, 246, 0.38);
+  overflow: hidden;
 }
 
 .home-main {
