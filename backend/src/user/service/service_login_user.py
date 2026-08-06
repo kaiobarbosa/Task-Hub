@@ -27,7 +27,7 @@ def user_login_efetuated(sql, user_data):
     if result[1] == 200:
         sql_select_by_email = user_model_select_by_email()
         user_exist_data = select_user_by_email(sql_select_by_email, user_data["email"])
-
+        
         return jsonify({
             
             "User" : user_exist_data
